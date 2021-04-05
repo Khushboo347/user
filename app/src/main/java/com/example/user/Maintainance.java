@@ -6,20 +6,48 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Maintainance extends AppCompatActivity {
+    private  static final String[] YEAR = new String[]{
+            "1"
+    };
 
     DrawerLayout drawerLayout;
-    Button Submit;
+    Button submit;
+    TextInputEditText main_query;
+    Db DB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintainance2);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        Submit = findViewById(R.id.Submit);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        submit = (Button) findViewById(R.id.submit);
+        main_query= (TextInputEditText) findViewById(R.id.main_query);
+        DB = new Db(this);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = main_query.getText().toString();
+
+                if(query.equals("")) {
+                    Toast.makeText(Maintainance.this, "Field is empty", Toast.LENGTH_SHORT).show();
+                }
+                    Boolean insert = DB.insertData(query);
+                if(insert == true){
+                    Toast.makeText(Maintainance.this, "Message sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
+
 
     public void ClickMenu(View view){
         //Open drawer

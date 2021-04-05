@@ -43,7 +43,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/Submit"
+            android:id="@+id/submit"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:hint="Submit"
